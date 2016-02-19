@@ -318,7 +318,11 @@ namespace ClientPatcher
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
 
-            Shell objShell = new Shell();
+            Type t = Type.GetTypeFromProgID("Shell.Application");
+
+            dynamic objShell = Activator.CreateInstance(t);
+
+            //var objShell = new Shell();
             Folder destinationFolder = objShell.NameSpace(folderPath);
             Folder sourceFile = objShell.NameSpace(zipFile);
 
